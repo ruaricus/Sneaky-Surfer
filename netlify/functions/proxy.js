@@ -115,10 +115,17 @@ exports.handler = async (event) => {
     };
   }
 
-  let targetUrl;
-  try {
-    targetUrl = new URL(target).toString();
-  } catch {
+let targetUrl;
+try {
+  let decoded = decodeURIComponent(target.trim());
+
+  // ✅ Auto-fix missing protocol
+  if (!decoded.startsWith('http://') && !decoded.startsWith('https://')) {
+    decoded = 'https://' + decoded;
+  }
+
+  targetUrl = new URL(decoded).toString();
+} catch {
     return {
       statusCode: 400,
       headers: { 'content-type': 'application/json' },
