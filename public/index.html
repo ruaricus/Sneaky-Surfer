@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sneaky Surfer Proxy</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0f172a;
+        --panel: #111827;
+        --panel-soft: #1f2937;
+        --primary: #22d3ee;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, sans-serif;
+        background: radial-gradient(circle at top, #1e293b, var(--bg));
+        color: var(--text);
+        min-height: 100vh;
+      }
+      .app {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .toolbar {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        background: color-mix(in srgb, var(--panel), black 20%);
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 12px;
+      }
+      #urlInput {
+        width: 100%;
+        border: 1px solid #374151;
+        background: var(--panel-soft);
+        color: var(--text);
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-size: 15px;
+      }
+      #goButton {
+        border: 0;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #06b6d4, var(--primary));
+        color: #082f49;
+        font-weight: 700;
+        padding: 10px 18px;
+        cursor: pointer;
+      }
+      .status {
+        margin-top: 12px;
+        font-size: 13px;
+        color: var(--muted);
+        min-height: 1.2em;
+      }
+      .viewer {
+        margin-top: 16px;
+        height: calc(100vh - 180px);
+        border: 1px solid #334155;
+        border-radius: 12px;
+        overflow: hidden;
+        background: white;
+      }
+      #proxyFrame {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      .error {
+        color: #fca5a5;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <h1>Sneaky Surfer</h1>
+      <form id="proxyForm" class="toolbar">
+        <input id="urlInput" type="text" placeholder="Enter URL or search query" autocomplete="off" />
+        <button id="goButton" type="submit">Go</button>
+      </form>
+      <div id="status" class="status">Ready.</div>
+      <section class="viewer">
+        <iframe id="proxyFrame" title="Proxied content sandbox" sandbox="allow-forms allow-scripts allow-same-origin allow-popups"></iframe>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
